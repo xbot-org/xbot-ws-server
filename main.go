@@ -93,7 +93,7 @@ func main() {
 			return
 		}
 	})
-	err := http.ListenAndServe("localhost:"+Cfg.Port, nil)
+	err := http.ListenAndServe(":"+Cfg.Port, nil)
 	if err != nil {
 		log.Printf("err: %+v", err)
 		return
