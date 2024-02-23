@@ -30,13 +30,18 @@ func main() {
 	loadConfig()
 
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
+		defer r.Body.Close()
+
 		c, err := upgrader.Upgrade(w, r, nil)
 		if err != nil {
 			log.Printf("err: %+v", err)
 			return
 		}
-
-		defer c.Close()
+		defer func() {
+			r.Body.Close()
+			c.Close()
+			delete(connMap, r.URL.Query().Get("key"))
+		}()
 
 		log.Println("已连接：", r.RemoteAddr, r.URL.Query().Get("key"))
 
