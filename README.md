@@ -17,3 +17,13 @@ PORT=XXXX
 xbot 的 `.env` 需要配置上 `WS_SERVER` ，对应地址为 `ws://xxxxx:8080/ws`
 
 接口地址为 `http://xxxxx:8080/api`
+
+## 多个客户端
+
+多个客户端，一个WS服务时，需要加上`key`参数区分不同的客户端。
+
+例： WS 地址 ``ws://xxxxx:8080/ws?key=xxx`
+
+接口地址为 `http://xxxxx:8080/api?key=xxx`
+
+每个客户端设置一个key
